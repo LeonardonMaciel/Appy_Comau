@@ -191,8 +191,6 @@ public class SuporteSearch extends AppCompatActivity {
         btnvisualizar.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View view) {
-
-
                 SearchCliente nomeid = new SearchCliente();
                 int testeid = nomeid.getR_id();
 
@@ -202,7 +200,7 @@ public class SuporteSearch extends AppCompatActivity {
                 String nomeok = nomeclienteok.getR_nome();
 
 
-                setContentView(R.layout.search_cadastro);
+                setContentView(R.layout.tela_cadastro);
                 TextView txt1 = (TextView)findViewById(R.id.idcliente);
                 TextView txt2 = (TextView)findViewById(R.id.nomeclientecd);
 

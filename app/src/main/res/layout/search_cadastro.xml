@@ -101,18 +101,18 @@
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
         android:visibility="invisible"
         tools:ignore="HardcodedText,MissingConstraints,RtlHardcoded"
-        tools:layout_editor_absoluteX="102dp"
-        tools:layout_editor_absoluteY="235dp" />
+        tools:layout_editor_absoluteX="43dp"
+        tools:layout_editor_absoluteY="225dp" />
 
     <RadioGroup
         android:id="@+id/rgSexo"
-        android:layout_width="27dp"
-        android:layout_height="30dp"
+        android:layout_width="57dp"
+        android:layout_height="40dp"
         android:orientation="horizontal"
         android:visibility="invisible"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="187dp"
-        tools:ignore="MissingConstraints">
+        tools:layout_editor_absoluteY="177dp">
 
     </RadioGroup>
 
@@ -133,9 +133,9 @@
         android:layout_height="48dp"
         android:entries="@array/estados"
         android:visibility="invisible"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="149dp"
-        tools:layout_editor_absoluteY="225dp"
-        tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteY="225dp" />
 
     <CheckBox
         android:id="@+id/chkVip"
@@ -144,8 +144,8 @@
         android:text="Este cliente é VIP"
         android:visibility="invisible"
         tools:ignore="HardcodedText,MissingConstraints"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="226dp" />
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="294dp" />
 
     <Button
         android:id="@+id/btnCancelar"
