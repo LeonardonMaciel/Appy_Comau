@@ -12,7 +12,6 @@ public class ClienteHolder extends RecyclerView.ViewHolder {
     public TextView nomeCliente;
     public ImageButton btnEditar;
     public ImageButton btnExcluir;
-
     public ImageButton btnEditar1;
 
     public ClienteHolder(View itemView) {

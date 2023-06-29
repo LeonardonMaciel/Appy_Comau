@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Crud.db";
     private static final int DATABASE_VERSION = 1;
-    private final String CREATE_TABLE = "CREATE TABLE Clientes (ID INTEGER PRIMARY KEY AUTOINCREMENT, Nome TEXT NOT NULL, Sexo TEXT, UF TEXT NOT NULL, Vip INTEGER NOT NULL);";
+    private final String CREATE_TABLE = "CREATE TABLE Clientes (ID INTEGER PRIMARY KEY AUTOINCREMENT, Nome TEXT NOT NULL, Garantia TEXT, UF TEXT NOT NULL, Vip INTEGER NOT NULL, Modelorobo TEXT NOT NULL, Serialrobo TEXT NOT NULL, Modelocontrolador TEXT NOT NULL, Serialcontrolador TEXT NOT NULL, Aplicação TEXT NOT NULL);";
 
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

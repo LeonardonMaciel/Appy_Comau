@@ -54,16 +54,27 @@ public class TelaCadastro extends AppCompatActivity {
             EditText txtNome = (EditText)findViewById(R.id.txtNome);
             Spinner spnEstado = (Spinner)findViewById(R.id.spnEstado);
             CheckBox chkVip = (CheckBox)findViewById(R.id.chkVip);
+            EditText txtModeloRobo = (EditText)findViewById(R.id.txtModeloRobo);
+            EditText txtSerialRobo = (EditText)findViewById(R.id.txtSerialRobo);
+            EditText txtModeloControlador = (EditText)findViewById(R.id.txtModeloControlador);
+            EditText txtSerialControlador = (EditText)findViewById(R.id.txtSerialControlador);
+            EditText txtAplicação = (EditText)findViewById(R.id.txtAplicação);
 
             txtNome.setText(clienteEditado.getNome());
             chkVip.setChecked(clienteEditado.getVip());
             spnEstado.setSelection(getIndex(spnEstado, clienteEditado.getUf()));
-            if(clienteEditado.getSexo() != null){
+            txtModeloRobo.setText(clienteEditado.getModelorobo());
+            txtSerialRobo.setText(clienteEditado.getSerialrobo());
+            txtModeloControlador.setText(clienteEditado.getModelocontrolador());
+            txtSerialControlador.setText(clienteEditado.getSerialcontrolador());
+            txtAplicação.setText(clienteEditado.getAplicação());
+
+            if(clienteEditado.getGarantia() != null){
                 RadioButton rb;
-                if(clienteEditado.getSexo().equals("M"))
-                    rb = (RadioButton)findViewById(R.id.rbMasculino);
+                if(clienteEditado.getGarantia().equals("S"))
+                    rb = (RadioButton)findViewById(R.id.rbSim);
                 else
-                    rb = (RadioButton)findViewById(R.id.rbFeminino);
+                    rb = (RadioButton)findViewById(R.id.rbNão);
                 rb.setChecked(true);
             }
         }
@@ -96,23 +107,34 @@ public class TelaCadastro extends AppCompatActivity {
                 //carregando os campos
                 EditText txtNome = (EditText)findViewById(R.id.txtNome);
                 Spinner spnEstado = (Spinner)findViewById(R.id.spnEstado);
-                RadioGroup rgSexo = (RadioGroup)findViewById(R.id.rgSexo);
+                RadioGroup rgGarantia = (RadioGroup)findViewById(R.id.rgGarantia);
                 CheckBox chkVip = (CheckBox)findViewById(R.id.chkVip);
+                EditText txtModeloRobo = (EditText)findViewById(R.id.txtModeloRobo);
+                EditText txtSerialRobo = (EditText)findViewById(R.id.txtSerialRobo);
+                EditText txtModeloControlador = (EditText)findViewById(R.id.txtModeloControlador);
+                EditText txtSerialControlador = (EditText)findViewById(R.id.txtSerialControlador);
+                EditText txtAplicação = (EditText)findViewById(R.id.txtAplicação);
 
                 //pegando os valores
                 String nome = txtNome.getText().toString();
                 String uf = spnEstado.getSelectedItem().toString();
                 boolean vip = chkVip.isChecked();
-                String sexo = rgSexo.getCheckedRadioButtonId() == R.id.rbMasculino ? "M" : "F";
+                String garantia = rgGarantia.getCheckedRadioButtonId() == R.id.rbSim ? "S" : "N";
+                String modelorobo = txtModeloRobo.getText().toString();
+                String serialrobo = txtSerialRobo.getText().toString();
+                String modelocontrolador= txtModeloControlador.getText().toString();
+                String serialcontrolador = txtSerialControlador.getText().toString();
+                String aplicação = txtAplicação.getText().toString();
+
 
                 //salvando os dados
                 ClienteDAO dao = new ClienteDAO(getBaseContext());
                 boolean sucesso;
 
                 if(clienteEditado != null)
-                    sucesso = dao.salvar(clienteEditado.getId(), nome, sexo, uf, vip);
+                    sucesso = dao.salvar(clienteEditado.getId(),nome, garantia, uf, vip, modelorobo, serialrobo, modelocontrolador, serialcontrolador, aplicação);
                 else
-                    sucesso = dao.salvar(nome, sexo, uf, vip);
+                    sucesso = dao.salvar(nome, garantia, uf, vip, modelorobo, serialrobo, modelocontrolador, serialcontrolador, aplicação);
 
                 if(sucesso) {
 
@@ -127,7 +149,7 @@ public class TelaCadastro extends AppCompatActivity {
 
                     //limpa os campos
                     txtNome.setText("");
-                    rgSexo.setSelected(false);
+                    rgGarantia.setSelected(false);
                     spnEstado.setSelection(0);
                     chkVip.setChecked(false);
 

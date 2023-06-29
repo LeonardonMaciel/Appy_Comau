@@ -22,7 +22,6 @@ public class ClienteDAO{
         SearchCliente rid = new SearchCliente();
         SearchCliente rnome = new SearchCliente();
 
-
         SearchCliente nomecliente = new SearchCliente();
         String name = nomecliente.getTxtnome().toString();
 
@@ -31,12 +30,17 @@ public class ClienteDAO{
         cursor.moveToFirst();
         @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("ID"));
         @SuppressLint("Range") String nome = cursor.getString(cursor.getColumnIndex("Nome"));
-        @SuppressLint("Range")String sexo = cursor.getString(cursor.getColumnIndex("Sexo"));
+        @SuppressLint("Range")String garantia = cursor.getString(cursor.getColumnIndex("Garantia"));
         @SuppressLint("Range")String uf = cursor.getString(cursor.getColumnIndex("UF"));
         @SuppressLint("Range")boolean vip = cursor.getInt(cursor.getColumnIndex("Vip")) > 0;
+        @SuppressLint("Range") String modelorobo = cursor.getString(cursor.getColumnIndex("Modelorobo"));
+        @SuppressLint("Range") String serialrobo = cursor.getString(cursor.getColumnIndex("Serialrobo"));
+        @SuppressLint("Range") String modelocontrolador = cursor.getString(cursor.getColumnIndex("Modelocontrolador"));
+        @SuppressLint("Range") String serialcontrolador = cursor.getString(cursor.getColumnIndex("Serialcontrolador"));
+        @SuppressLint("Range") String aplicação = cursor.getString(cursor.getColumnIndex("Aplicação"));
 
         if (nome.equals(name)) {
-            clientes.add(new Cliente(id, nome, sexo, uf, vip));
+            clientes.add(new Cliente(id, nome, garantia, uf, vip, modelorobo, serialrobo, modelocontrolador, serialcontrolador, aplicação));
             rid.setR_id(id);
             rnome.setR_nome(nome);
             return clientes;
@@ -46,12 +50,17 @@ public class ClienteDAO{
         while (cursor.moveToNext()){
             id = cursor.getInt(cursor.getColumnIndex("ID"));
             nome = cursor.getString(cursor.getColumnIndex("Nome"));
-            sexo = cursor.getString(cursor.getColumnIndex("Sexo"));
+            garantia = cursor.getString(cursor.getColumnIndex("Garantia"));
             uf = cursor.getString(cursor.getColumnIndex("UF"));
             vip = cursor.getInt(cursor.getColumnIndex("Vip")) > 0;
+            modelorobo = cursor.getString(cursor.getColumnIndex("Modelorobo"));
+            serialrobo = cursor.getString(cursor.getColumnIndex("Serialorobo"));
+            modelocontrolador = cursor.getString(cursor.getColumnIndex("Modelocontrolador"));
+            serialcontrolador = cursor.getString(cursor.getColumnIndex("Serialcontrolador"));
+            aplicação = cursor.getString(cursor.getColumnIndex("Aplicação"));
 
             if (nome.equals(name)){
-                clientes.add(new Cliente(id, nome, sexo, uf, vip));
+                clientes.add(new Cliente(id, nome, garantia, uf, vip, modelorobo, serialrobo, modelocontrolador, serialcontrolador, aplicação));
                 rid.setR_id(id);
                 rnome.setR_nome(nome);
                 return clientes;
@@ -71,38 +80,54 @@ public class ClienteDAO{
         while(cursor.moveToNext()){
             @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("ID"));
             @SuppressLint("Range") String nome = cursor.getString(cursor.getColumnIndex("Nome"));
-            @SuppressLint("Range")String sexo = cursor.getString(cursor.getColumnIndex("Sexo"));
+            @SuppressLint("Range")String garantia = cursor.getString(cursor.getColumnIndex("Garantia"));
             @SuppressLint("Range")String uf = cursor.getString(cursor.getColumnIndex("UF"));
             @SuppressLint("Range")boolean vip = cursor.getInt(cursor.getColumnIndex("Vip")) > 0;
-            clientes.add(new Cliente(id, nome, sexo, uf, vip));
+            @SuppressLint("Range") String modelorobo = cursor.getString(cursor.getColumnIndex("Modelorobo"));
+            @SuppressLint("Range") String serialrobo = cursor.getString(cursor.getColumnIndex("Serialrobo"));
+            @SuppressLint("Range") String modelocontrolador = cursor.getString(cursor.getColumnIndex("Modelocontrolador"));
+            @SuppressLint("Range") String serialcontrolador = cursor.getString(cursor.getColumnIndex("Serialcontrolador"));
+            @SuppressLint("Range") String aplicação = cursor.getString(cursor.getColumnIndex("Aplicação"));
+            clientes.add(new Cliente(id, nome, garantia, uf, vip, modelorobo, serialrobo, modelocontrolador, serialcontrolador, aplicação));
         }
         cursor.close();
         return clientes;
     }
+
     public Cliente retornarUltimo(){
         Cursor cursor = gw.getDatabase().rawQuery("SELECT * FROM Clientes ORDER BY ID DESC", null);
         if(cursor.moveToFirst()){
             @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("ID"));
             @SuppressLint("Range") String nome = cursor.getString(cursor.getColumnIndex("Nome"));
-            @SuppressLint("Range") String sexo = cursor.getString(cursor.getColumnIndex("Sexo"));
+            @SuppressLint("Range") String garantia = cursor.getString(cursor.getColumnIndex("Garantia"));
             @SuppressLint("Range") String uf = cursor.getString(cursor.getColumnIndex("UF"));
             @SuppressLint("Range") boolean vip = cursor.getInt(cursor.getColumnIndex("Vip")) > 0;
+            @SuppressLint("Range") String modelorobo = cursor.getString(cursor.getColumnIndex("Modelorobo"));
+            @SuppressLint("Range") String serialrobo = cursor.getString(cursor.getColumnIndex("Serialrobo"));
+            @SuppressLint("Range") String modelocontrolador = cursor.getString(cursor.getColumnIndex("Modelocontrolador"));
+            @SuppressLint("Range") String serialcontrolador = cursor.getString(cursor.getColumnIndex("Serialcontrolador"));
+            @SuppressLint("Range") String aplicação = cursor.getString(cursor.getColumnIndex("Aplicação"));
             cursor.close();
-            return new Cliente(id, nome, sexo, uf, vip);
+            return new Cliente(id, nome, garantia, uf, vip, modelorobo, serialrobo, modelocontrolador, serialcontrolador, aplicação);
         }
         return null;
     }
 
-    public boolean salvar(String nome, String sexo, String uf, boolean vip){
-        return salvar(0, nome, sexo, uf, vip);
+    public boolean salvar(String nome, String garantia, String uf, boolean vip, String modelorobo, String serialrobo, String modelocontrolador, String serialcontrolador, String aplicação){
+        return salvar(0, nome, garantia, uf, vip, modelorobo, serialrobo, modelocontrolador, serialcontrolador, aplicação);
     }
 
-    public boolean salvar(int id, String nome, String sexo, String uf, boolean vip){
+    public boolean salvar(int id, String nome, String garantia, String uf, boolean vip, String modelorobo, String serialrobo, String modelocontrolador, String serialcontrolador, String aplicação){
         ContentValues cv = new ContentValues();
         cv.put("Nome", nome);
-        cv.put("Sexo", sexo);
+        cv.put("Garantia", garantia);
         cv.put("UF", uf);
         cv.put("Vip", vip ? 1 : 0);
+        cv.put("ModeloRobo", modelorobo);
+        cv.put("SerialRobo", serialrobo);
+        cv.put("ModeloControlador", modelocontrolador);
+        cv.put("SerialControlador", serialcontrolador);
+        cv.put("aplicação", aplicação);
         if(id > 0)
             return gw.getDatabase().update(TABLE_CLIENTES, cv, "ID=?", new String[]{ id + "" }) > 0;
         else
